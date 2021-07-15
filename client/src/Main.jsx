@@ -44,12 +44,9 @@ async function bubbleSort(ar, changeArray){
         if(!flag){break;}
     }
     changeArray([...ar]);
-    console.log(ar);
 }
 
 export default function Main() {
-    
-
     const [size, changeSize] = useState(10);
     const [sort, changeSort] = useState();
     const [array, changeArray] = useState(createArray(10));
