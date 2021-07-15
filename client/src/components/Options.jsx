@@ -5,9 +5,9 @@ export default function Options(props) {
     return (
         <div className="options">
             <form>
-                <div className="form-section"> <h2>Generate random array</h2>
+                {/* <div className="form-section"> <h2>Generate random array</h2>
                     <input type="button" value="Generate" />
-                </div>
+                </div> */}
 
                 <div className="form-section"> <h2>Select sorting algorithm</h2>
                     <label htmlFor="0">
@@ -37,7 +37,7 @@ export default function Options(props) {
                 </div>
 
                 <div className="form-section"> <h2>Select Range of values</h2>
-                    <input type="range" name="size" id="" min="5" max="1000" onChange={props.handleChange} />
+                    <input type="range" name="size" id="" min="5" max="150" onChange={props.handleChange} />
                 </div>
 
                 <div className="form-section">
