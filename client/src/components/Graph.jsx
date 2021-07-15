@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Graph() {
     return (
-        <div>
-            
+        <div className="graph">
+
         </div>
     )
 }

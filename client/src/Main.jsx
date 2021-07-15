@@ -4,8 +4,7 @@ import Graph from './components/Graph';
 
 export default function Main() {
     return (
-        <div>
-            <p>Welcome to React</p>
+        <div className="main">
             <Options />
             <Graph />
         </div>
