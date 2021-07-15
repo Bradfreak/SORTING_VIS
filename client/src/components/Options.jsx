@@ -41,7 +41,7 @@ export default function Options(props) {
                 </div>
 
                 <div className="form-section">
-                    <input type="button" value="Sort" />
+                    <input type="button" value="Sort" onClick={props.submit}/>
                 </div>
             </form>
         </div>
