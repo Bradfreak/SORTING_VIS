@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default function Graph(props) {
     return (
         <div className="graph">
@@ -8,6 +7,7 @@ export default function Graph(props) {
                 return (
                     <span id={value} key={key}>
                         <Bar
+                            highlight={props.highlight[key]}
                             height={value / props.size}
                         />
 
@@ -22,7 +22,7 @@ export default function Graph(props) {
 function Bar(props) {
     return (
         <div
-            className="bar"
+            className={`bar ${props.highlight}`}
             style={{
                 flex: props.height
             }}

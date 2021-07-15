@@ -112,6 +112,18 @@ code {
   background-color: hsl(207, 61%, 75%);
 }
 
+.graph .bar.blue {
+  background-color: hsl(207, 61%, 75%);
+}
+
+.graph .bar.red {
+  background-color: hsl(0, 61%, 75%);
+}
+
+.graph .bar.green {
+  background-color: hsl(100, 61%, 75%);
+}
+
 .graph .value {
   padding: 10px 0;
   font-weight: 700;
