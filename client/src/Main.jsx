@@ -27,27 +27,28 @@ function createArray(size){
     return array;
 }
 
+async function bubbleSort(ar, changeArray){
+    let i, j;
+    for(i = 0; i < ar.length; i++){
+        let flag = false;
+        for(j = 0; j < ar.length-1-i; j++){
+            if(ar[j] > ar[j+1]){
+                let temp = ar[j+1];
+                ar[j+1] = ar[j];
+                ar[j] = temp;
+                changeArray([...ar]);
+                await sleep(300);
+                flag = true;
+            }
+        }
+        if(!flag){break;}
+    }
+    changeArray([...ar]);
+    console.log(ar);
+}
+
 export default function Main() {
     
-    async function bubbleSort(ar){
-        let i, j;
-        for(i = 0; i < ar.length; i++){
-            let flag = false;
-            for(j = 0; j < ar.length-1-i; j++){
-                if(ar[j] > ar[j+1]){
-                    let temp = ar[j+1];
-                    ar[j+1] = ar[j];
-                    ar[j] = temp;
-                    changeArray([...ar]);
-                    await sleep(300);
-                    flag = true;
-                }
-            }
-            if(!flag){break;}
-        }
-        changeArray([...ar]);
-        console.log(ar);
-    }
 
     const [size, changeSize] = useState(10);
     const [sort, changeSort] = useState();
@@ -57,7 +58,7 @@ export default function Main() {
     function submit(){
         //disable everything
         // and put a cancel button
-        if(sort === "0"){bubbleSort(array);}
+        if(sort === "0"){bubbleSort(array, changeArray);}
     }
 
     function handleChange(event) {
