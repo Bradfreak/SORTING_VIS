@@ -128,7 +128,7 @@ async function insertionSort(ar, col, changeArray, changeHighlight) {
     for (i = 1; i < ar.length; i++) {
         let ip = i;
 
-        col[ip] = "red";
+        col[ip] = "green";
         changeHighlight([...col]);
         await sleep(1 / ar.length);
 
@@ -136,7 +136,7 @@ async function insertionSort(ar, col, changeArray, changeHighlight) {
             if (ar[j] > ar[i]) {
                 ip = j;
 
-                col[ip] = "green";
+                col[ip] = "red";
                 changeHighlight([...col]);
                 await sleep(1 / ar.length);
 
@@ -166,6 +166,11 @@ async function insertionSort(ar, col, changeArray, changeHighlight) {
                 changeHighlight([...col]);
                 await sleep(1 / ar.length);
             }
+        }
+        else {
+            col[ip] = "blue";
+            changeHighlight([...col]);
+            await sleep(1 / ar.length);
         }
     }
     changeArray([...ar]);
