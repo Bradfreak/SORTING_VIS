@@ -182,15 +182,14 @@ export default function Main() {
     const [array, changeArray] = useState(createArray(10));
     const [highlight, changeHighlight] = useState(createColor(10));
 
-    function submit() {
-        //disable everything
+    async function submit() {
         // and put a cancel button
         if (sort === "0") {
-            bubbleSort(array, highlight, changeArray, changeHighlight);
+            await bubbleSort(array, highlight, changeArray, changeHighlight);
         } else if (sort === "1") {
-            insertionSort(array, highlight, changeArray, changeHighlight);
+            await insertionSort(array, highlight, changeArray, changeHighlight);
         } else if (sort === "2") {
-            selectionSort(array, highlight, changeArray, changeHighlight);
+            await selectionSort(array, highlight, changeArray, changeHighlight);
         }
     }
 
@@ -207,8 +206,15 @@ export default function Main() {
     }
     return (
         <div className="main">
-            <Options handleChange={handleChange} submit={submit} />
-            <Graph size={size} sort={sort} array={array} highlight={highlight} />
+            <Options
+                handleChange={handleChange}
+                submit={submit}
+            />
+            <Graph
+                size={size}
+                sort={sort}
+                array={array}
+                highlight={highlight} />
         </div>
     );
 }
