@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
-import Options from './components/Options';
-import Graph from './components/Graph';
-
+import React, { useState } from "react";
+import Options from "./components/Options";
+import Graph from "./components/Graph";
 
 function shuffle(array) {
-    let tmp, current, top = array.length;
-    if (top) while (--top) {
-        current = Math.floor(Math.random() * (top + 1));
-        tmp = array[current];
-        array[current] = array[top];
-        array[top] = tmp;
-    }
+    let tmp,
+        current,
+        top = array.length;
+    if (top)
+        while (--top) {
+            current = Math.floor(Math.random() * (top + 1));
+            tmp = array[current];
+            array[current] = array[top];
+            array[top] = tmp;
+        }
     return array;
 }
 
@@ -26,13 +28,13 @@ function createArray(size) {
 function createColor(size) {
     let color = [];
     for (let i = 1; i <= size; i++) {
-        color[i - 1] = 'blue'
+        color[i - 1] = "blue";
     }
     return color;
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms * 2000));
+    return new Promise((resolve) => setTimeout(resolve, ms * 2000));
 }
 
 async function bubbleSort(ar, col, changeArray, changeHighlight) {
@@ -40,18 +42,16 @@ async function bubbleSort(ar, col, changeArray, changeHighlight) {
     for (i = 0; i < ar.length; i++) {
         let flag = false;
         for (j = 0; j < ar.length - 1 - i; j++) {
-
             // check stage
-            col[j] = 'green';
-            col[j + 1] = 'green';
+            col[j] = "green";
+            col[j + 1] = "green";
             changeHighlight([...col]);
             await sleep(1 / ar.length);
 
             if (ar[j] > ar[j + 1]) {
-
                 // swap stage
-                col[j] = 'red';
-                col[j + 1] = 'red';
+                col[j] = "red";
+                col[j + 1] = "red";
                 changeHighlight([...col]);
                 await sleep(1 / ar.length);
 
@@ -61,45 +61,46 @@ async function bubbleSort(ar, col, changeArray, changeHighlight) {
 
                 changeArray([...ar]);
                 // swap done stage
-                col[j] = 'green';
-                col[j + 1] = 'green';
+                col[j] = "green";
+                col[j + 1] = "green";
                 changeHighlight([...col]);
                 await sleep(1 / ar.length);
 
                 flag = true;
             }
 
-            col[j] = 'blue';
-            col[j + 1] = 'blue';
+            col[j] = "blue";
+            col[j + 1] = "blue";
             changeHighlight([...col]);
             await sleep(1 / ar.length);
         }
-        if (!flag) { break; }
+        if (!flag) {
+            break;
+        }
     }
     changeArray([...ar]);
 }
 
-async function selectionSort(ar, col, changeArray, changeHighlight){
+async function selectionSort(ar, col, changeArray, changeHighlight) {
     let i, j;
-    for(i = ar.length-1; i > 0; i--){
+    for (i = ar.length - 1; i > 0; i--) {
         let maxi = 0;
-        col[maxi] = 'green';
+        col[maxi] = "green";
         changeHighlight([...col]);
         await sleep(1 / ar.length);
-        for(j = 0; j <= i; j++){
-            if(ar[maxi] < ar[j]){
-                col[maxi] = 'blue';
+        for (j = 0; j <= i; j++) {
+            if (ar[maxi] < ar[j]) {
+                col[maxi] = "blue";
                 maxi = j;
-                col[maxi] = 'green';
+                col[maxi] = "green";
                 changeHighlight([...col]);
                 await sleep(1 / ar.length);
             }
         }
-        if(maxi !== i){
-            
+        if (maxi !== i) {
             // swap stage
-            col[maxi] = 'red';
-            col[i] = 'red';
+            col[maxi] = "red";
+            col[i] = "red";
             changeHighlight([...col]);
             await sleep(1 / ar.length);
 
@@ -109,15 +110,63 @@ async function selectionSort(ar, col, changeArray, changeHighlight){
 
             changeArray([...ar]);
             // swap done stage
-            col[maxi] = 'green';
-            col[i] = 'green';
+            col[maxi] = "green";
+            col[i] = "green";
             changeHighlight([...col]);
             await sleep(1 / ar.length);
         }
-        col[maxi] = 'blue';
-        col[i] = 'blue';
+        col[maxi] = "blue";
+        col[i] = "blue";
         changeHighlight([...col]);
         await sleep(1 / ar.length);
+    }
+    changeArray([...ar]);
+}
+
+async function insertionSort(ar, col, changeArray, changeHighlight) {
+    let i, j;
+    for (i = 1; i < ar.length; i++) {
+        let ip = i;
+
+        col[ip] = "red";
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+
+        for (j = 0; j < i; j++) {
+            if (ar[j] > ar[i]) {
+                ip = j;
+
+                col[ip] = "green";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+
+                break;
+            }
+        }
+        if (ip !== i) {
+            for (let j = i; j > ip; j--) {
+
+                col[j] = "red";
+                col[j - 1] = "red";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+
+                let temp = ar[j];
+                ar[j] = ar[j - 1];
+                ar[j - 1] = temp;
+
+                changeArray([...ar]);
+                col[j] = "green";
+                col[j - 1] = "green";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+
+                col[j] = "blue";
+                col[j - 1] = "blue";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+            }
+        }
     }
     changeArray([...ar]);
 }
@@ -133,8 +182,9 @@ export default function Main() {
         // and put a cancel button
         if (sort === "0") {
             bubbleSort(array, highlight, changeArray, changeHighlight);
-        }
-        else if (sort === "2") {
+        } else if (sort === "1") {
+            insertionSort(array, highlight, changeArray, changeHighlight);
+        } else if (sort === "2") {
             selectionSort(array, highlight, changeArray, changeHighlight);
         }
     }
@@ -144,8 +194,7 @@ export default function Main() {
         const value = event.target.value;
         if (name === "sort") {
             changeSort(value);
-        }
-        else {
+        } else {
             changeSize(value);
             changeArray(createArray(value));
             changeHighlight(createColor(value));
@@ -153,16 +202,8 @@ export default function Main() {
     }
     return (
         <div className="main">
-            <Options
-                handleChange={handleChange}
-                submit={submit}
-            />
-            <Graph
-                size={size}
-                sort={sort}
-                array={array}
-                highlight={highlight}
-            />
+            <Options handleChange={handleChange} submit={submit} />
+            <Graph size={size} sort={sort} array={array} highlight={highlight} />
         </div>
-    )
+    );
 }
