@@ -176,6 +176,58 @@ async function insertionSort(ar, col, changeArray, changeHighlight) {
     changeArray([...ar]);
 }
 
+// MERGE SORT
+async function join(ar, l, m, r, col, changeArray, changeHighlight) {
+    let i, j;
+    for (i = m + 1; i <= r; i++) {
+        let ip = i;
+
+        for (j = l; j <= i; j++) {
+
+            if (ar[j] > ar[i]) {
+                col[i] = "green";
+                col[j] = "green";
+                changeHighlight([...col]);
+                await sleep(2 / ar.length);
+
+                ip = j;
+
+                col[i] = "blue";
+                col[j] = "blue";
+                changeHighlight([...col]);
+                await sleep(2 / ar.length);
+
+                break;
+            }
+        }
+        if (ip !== i) {
+            for (let j = i; j > ip; j--) {
+                // shifting 
+                let temp = ar[j];
+                ar[j] = ar[j - 1];
+                ar[j - 1] = temp;
+
+                changeArray([...ar]);
+            }
+        } else {
+            break;
+        }
+
+    }
+}
+
+async function mergeSort(a, l, r, col, changeArray, changeHighlight) {
+    if (l < r) {
+        let m = Math.floor((l + r - 1) / 2);
+
+        await mergeSort(a, l, m, col, changeArray, changeHighlight);
+        await mergeSort(a, m + 1, r, col, changeArray, changeHighlight);
+
+        await join(a, l, m, r, col, changeArray, changeHighlight);
+    }
+}
+
+
 export default function Main() {
     const [size, changeSize] = useState(10);
     const [sort, changeSort] = useState();
@@ -190,6 +242,8 @@ export default function Main() {
             await insertionSort(array, highlight, changeArray, changeHighlight);
         } else if (sort === "2") {
             await selectionSort(array, highlight, changeArray, changeHighlight);
+        } else if (sort === "3") {
+            await mergeSort(array, 0, array.length, highlight, changeArray, changeHighlight);
         }
     }
 
