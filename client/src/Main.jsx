@@ -79,6 +79,49 @@ async function bubbleSort(ar, col, changeArray, changeHighlight) {
     changeArray([...ar]);
 }
 
+async function selectionSort(ar, col, changeArray, changeHighlight){
+    let i, j;
+    for(i = ar.length-1; i > 0; i--){
+        let maxi = 0;
+        col[maxi] = 'green';
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+        for(j = 0; j <= i; j++){
+            if(ar[maxi] < ar[j]){
+                col[maxi] = 'blue';
+                maxi = j;
+                col[maxi] = 'green';
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+            }
+        }
+        if(maxi !== i){
+            
+            // swap stage
+            col[maxi] = 'red';
+            col[i] = 'red';
+            changeHighlight([...col]);
+            await sleep(1 / ar.length);
+
+            let temp = ar[maxi];
+            ar[maxi] = ar[i];
+            ar[i] = temp;
+
+            changeArray([...ar]);
+            // swap done stage
+            col[maxi] = 'green';
+            col[i] = 'green';
+            changeHighlight([...col]);
+            await sleep(1 / ar.length);
+        }
+        col[maxi] = 'blue';
+        col[i] = 'blue';
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+    }
+    changeArray([...ar]);
+}
+
 export default function Main() {
     const [size, changeSize] = useState(10);
     const [sort, changeSort] = useState();
@@ -90,6 +133,9 @@ export default function Main() {
         // and put a cancel button
         if (sort === "0") {
             bubbleSort(array, highlight, changeArray, changeHighlight);
+        }
+        else if (sort === "2") {
+            selectionSort(array, highlight, changeArray, changeHighlight);
         }
     }
 
