@@ -93,6 +93,16 @@ code {
   box-shadow: 10px 10px hsl(207, 61%, 15%);
 }
 
+/* disabled buttons */
+
+.options form input:disabled {
+  cursor: not-allowed;
+}
+
+.options form label.disabled {
+  cursor: not-allowed;
+}
+
 /* GRAPH */
 
 .graph {
@@ -119,8 +129,11 @@ code {
   width: 100%;
   background-color: hsl(207, 61%, 75%);
 
+  /* FaNcY */
+  /*   
   transition-property: flex;
   transition-duration: 300ms;
+  */
 }
 
 .graph .bar.blue {
