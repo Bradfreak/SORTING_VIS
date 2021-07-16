@@ -207,8 +207,8 @@ async function join(ar, l, m, r, col, changeArray, changeHighlight) {
                 ar[j] = ar[j - 1];
                 ar[j - 1] = temp;
 
-                changeArray([...ar]);
             }
+            changeArray([...ar]);
         } else {
             break;
         }
