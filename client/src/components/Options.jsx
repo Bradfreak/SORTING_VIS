@@ -6,6 +6,8 @@ export default function Options(props) {
 
     return (
         <div className="options">
+
+            <h1>Sorting Visualizer</h1>
             <form>
                 {/* <div className="form-section"> <h2>Generate random array</h2>
                     <input type="button" value="Generate" />

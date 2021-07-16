@@ -33,7 +33,15 @@ code {
   background: hsl(207, 61%, 23%);
   width: 30%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.options h1 {
+  color: hsl(207, 61%, 23%);
+  font-size: 50px;
+  text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white,
+    -1px -1px 0 white;
 }
 
 .options form {
@@ -167,6 +175,10 @@ code {
 
   .options {
     padding: 20px;
+  }
+
+  .options h1 {
+    padding-bottom: 10px;
   }
 
   .options form {
