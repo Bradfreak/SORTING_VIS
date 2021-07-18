@@ -8,6 +8,9 @@
 
 Worry no more! With the help of SORTING VISUALIZER ™ , you'll never have to struggle again!! 🎯 
 
+
+Check out the website [here](https://brogrammers-sorting-vis.netlify.app/).
+
 ## Sorting algorithms visualized:  
 
 * Bubble sort 
