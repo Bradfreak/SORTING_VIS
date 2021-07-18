@@ -37,6 +37,7 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms * 2000));
 }
 
+//Bubble Sort
 async function bubbleSort(ar, col, changeArray, changeHighlight) {
     let i, j;
     for (i = 0; i < ar.length; i++) {
@@ -81,6 +82,7 @@ async function bubbleSort(ar, col, changeArray, changeHighlight) {
     changeArray([...ar]);
 }
 
+//Selection Sort
 async function selectionSort(ar, col, changeArray, changeHighlight) {
     let i, j;
     for (i = ar.length - 1; i > 0; i--) {
@@ -123,6 +125,7 @@ async function selectionSort(ar, col, changeArray, changeHighlight) {
     changeArray([...ar]);
 }
 
+//Insertion Sort
 async function insertionSort(ar, col, changeArray, changeHighlight) {
     let i, j;
     for (i = 1; i < ar.length; i++) {
@@ -185,17 +188,21 @@ async function join(ar, l, m, r, col, changeArray, changeHighlight) {
         for (j = l; j <= i; j++) {
 
             if (ar[j] > ar[i]) {
-                col[i] = "green";
-                col[j] = "green";
+                col[i] = "red";
+                col[j] = "red";
                 changeHighlight([...col]);
                 await sleep(2 / ar.length);
 
                 ip = j;
 
+                col[i] = "green";
+                col[j] = "green";
+                changeHighlight([...col]);
+                await sleep(2 / ar.length);
+
                 col[i] = "blue";
                 col[j] = "blue";
                 changeHighlight([...col]);
-                await sleep(2 / ar.length);
 
                 break;
             }
@@ -227,6 +234,7 @@ async function mergeSort(a, l, r, col, changeArray, changeHighlight) {
     }
 }
 
+//Quick Sort
 async function partition(ar, low, high, col, changeArray, changeHighlight) {
     let pivot = ar[high];
     col[high] = "yellow";
