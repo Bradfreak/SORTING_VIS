@@ -39,6 +39,7 @@ code {
 
 .options h1 {
   color: hsl(207, 61%, 23%);
+  margin: 0 20px;
   font-size: 50px;
   text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white,
     -1px -1px 0 white;
@@ -205,5 +206,31 @@ code {
 
   .options form .form-section h2 {
     font-size: 30px;
+  }
+}
+
+/* RESPONSIVE : mobile view */
+
+@media screen and (max-width: 500px) {
+  .main {
+    height: auto;
+  }
+
+  .options h1 {
+    font-size: 40px;
+  }
+
+  .options form .form-section {
+    padding: 0 20px;
+  }
+
+  .options form .form-section h2 {
+    font-size: 25px;
+  }
+
+  .graph {
+    padding-bottom: 20px;
+    height: 500px;
+    /* min-height: 1000px; */
   }
 }
