@@ -227,6 +227,66 @@ async function mergeSort(a, l, r, col, changeArray, changeHighlight) {
     }
 }
 
+async function partition(ar, low, high, col, changeArray, changeHighlight) {
+    let pivot = ar[high];
+    col[high] = "yellow";
+    changeHighlight([...col]);
+    await sleep(1 / ar.length);
+    let i = low - 1, j;
+    for (j = low; j < high; j++) {
+        if (pivot > ar[j]) {
+            i++;
+            if (i !== j) {
+
+                col[j] = "red";
+                col[i] = "red";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+
+                let temp = ar[j];
+                ar[j] = ar[i];
+                ar[i] = temp;
+
+                changeArray([...ar]);
+                // swap done stage
+                col[j] = "green";
+                col[i] = "green";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+
+                col[j] = "blue";
+                col[i] = "blue";
+                changeHighlight([...col]);
+                await sleep(1 / ar.length);
+            }
+        }
+    }
+
+    col[i + 1] = "yellow";
+    col[high] = "yellow";
+    changeHighlight([...col]);
+    await sleep(1 / ar.length);
+
+    ar[high] = ar[i + 1];
+    ar[i + 1] = pivot;
+
+    changeArray([...ar]);
+
+    col[i + 1] = "blue";
+    col[high] = "blue";
+    changeHighlight([...col]);
+    await sleep(1 / ar.length);
+
+    return i + 1;
+}
+
+async function quickSort(ar, low, high, col, changeArray, changeHighlight) {
+    if (low < high) {
+        let part = await partition(ar, low, high, col, changeArray, changeHighlight);
+        await quickSort(ar, low, part - 1, col, changeArray, changeHighlight);
+        await quickSort(ar, part + 1, high, col, changeArray, changeHighlight);
+    }
+}
 
 export default function Main() {
     const [size, changeSize] = useState(10);
@@ -244,6 +304,8 @@ export default function Main() {
             await selectionSort(array, highlight, changeArray, changeHighlight);
         } else if (sort === "3") {
             await mergeSort(array, 0, array.length, highlight, changeArray, changeHighlight);
+        } else if (sort === "4") {
+            await quickSort(array, 0, array.length - 1, highlight, changeArray, changeHighlight);
         }
     }
 
