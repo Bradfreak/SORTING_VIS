@@ -148,6 +148,10 @@ code {
   background-color: hsl(207, 61%, 75%);
 }
 
+.graph .bar.yellow {
+  background-color: hsl(50, 61%, 75%);
+}
+
 .graph .bar.red {
   background-color: hsl(0, 61%, 75%);
 }
