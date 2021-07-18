@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default function Graph(props) {
+    var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
     return (
         <div className="graph">
             {props.array.map((value, key) => {
@@ -11,7 +13,11 @@ export default function Graph(props) {
                             height={value / props.size}
                         />
 
-                        {props.size <= 40 && <div className="value">{value}</div>}
+                        {
+                            windowWidth > 500
+                                ? props.size <= 40 && <div className="value">{value}</div>
+                                : props.size <= 15 && <div className="value">{value}</div>
+                        }
                     </span>
                 )
             })}

@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 export default function Options(props) {
     const [disable, toggleDisable] = useState(false);
 
+    var windowWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
     return (
         <div className="options">
 
@@ -41,7 +43,14 @@ export default function Options(props) {
                 </div>
 
                 <div className="form-section"> <h2>Select Range of values</h2>
-                    <input type="range" name="size" id="" min="5" max="150" onChange={props.handleChange} disabled={disable} />
+                    <input
+                        type="range"
+                        name="size"
+                        id=""
+                        min="5"
+                        max={windowWidth > 500 ? "150" : "50"}
+                        onChange={props.handleChange}
+                        disabled={disable} />
                 </div>
 
                 <div className="form-section">
