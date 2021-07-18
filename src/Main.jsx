@@ -296,6 +296,76 @@ async function quickSort(ar, low, high, col, changeArray, changeHighlight) {
     }
 }
 
+//Heap Sort
+async function heapify(ar, n, i, col, changeArray, changeHighlight) {
+    let largest = i;
+    let left = 2 * i + 1;
+    let right = 2 * i + 2;
+
+    if (left < n && ar[left] > ar[largest]) {
+        largest = left;
+    }
+    if (right < n && ar[right] > ar[largest]) {
+        largest = right;
+    }
+
+    if (largest !== i) {
+
+        col[largest] = "red";
+        col[i] = "red";
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+
+        let temp = ar[largest];
+        ar[largest] = ar[i];
+        ar[i] = temp;
+        changeArray([...ar]);
+
+        col[largest] = "green";
+        col[i] = "green";
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+
+        col[largest] = "blue";
+        col[i] = "blue";
+        changeHighlight([...col]);
+
+        await heapify(ar, n, largest, col, changeArray, changeHighlight);
+    }
+}
+
+async function heapSort(ar, col, changeArray, changeHighlight) {
+    let n = ar.length;
+    let i;
+    for (i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        await heapify(ar, n, i, col, changeArray, changeHighlight);
+    }
+
+    for (i = n - 1; i > 0; i--) {
+
+        col[0] = "yellow";
+        col[i] = "yellow";
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+
+        let temp = ar[i];
+        ar[i] = ar[0];
+        ar[0] = temp;
+        changeArray([...ar]);
+
+        col[0] = "green";
+        col[i] = "green";
+        changeHighlight([...col]);
+        await sleep(1 / ar.length);
+
+        col[0] = "blue";
+        col[i] = "blue";
+        changeHighlight([...col]);
+
+        await heapify(ar, i, 0, col, changeArray, changeHighlight);
+    }
+}
+
 export default function Main() {
     const [size, changeSize] = useState(10);
     const [sort, changeSort] = useState();
@@ -314,6 +384,8 @@ export default function Main() {
             await mergeSort(array, 0, array.length, highlight, changeArray, changeHighlight);
         } else if (sort === "4") {
             await quickSort(array, 0, array.length - 1, highlight, changeArray, changeHighlight);
+        } else if (sort === "5") {
+            await heapSort(array, highlight, changeArray, changeHighlight);
         }
     }
 
