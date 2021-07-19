@@ -49,6 +49,7 @@ export default function Options(props) {
                         id=""
                         min="5"
                         max={windowWidth > 500 ? "150" : "50"}
+                        value={props.size}
                         onChange={props.handleChange}
                         disabled={disable} />
                 </div>

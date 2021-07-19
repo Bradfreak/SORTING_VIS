@@ -43,6 +43,7 @@ export default function Main() {
             <Options
                 handleChange={handleChange}
                 submit={submit}
+                size={size}
             />
             <Graph
                 size={size}
